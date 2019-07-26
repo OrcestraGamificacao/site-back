@@ -1,10 +1,5 @@
 
 import os
-import sys
-print('AAAAAAAAAAAAAAAAAAAAAAAAAAAA')
-print(sys.path)
-# print(sys.path_importer_cache)
-print('AAAAAAAAAAAAAAAAAAAAAAAAAAAA')
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config, create_engine

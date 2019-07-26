@@ -1,4 +1,4 @@
-from app.models import Base
+from app.models.meta import Base
 from sqlalchemy import Column, String, Integer, Boolean
 
 
@@ -12,7 +12,7 @@ class Task(Base):
     """
     __tablename__ = 'tasks'
 
-    task_id = Column(Integer, primary_key=True)
+    task_id = Column(Integer, primary_key=True, autoincrement=True)
 
     name = Column(String(125), nullable=False)
 
@@ -26,10 +26,8 @@ class Task(Base):
         self.done = done if done is not None else False
 
     def __repr__(self):
-        return "<Task " \
-                    "id=%d, " % self.task_id \
-                    "name=%s, " % self.name \
-                    "description=%s, " % self.description \
-                    "done=%s" % self.done \
-                    ">"
+        return ("<Task(id=%d, " % self.task_id
+                + "name=%s, " % self.name
+                + "description=%s, " % self.description
+                + "done=%s)>" % self.done)
 
