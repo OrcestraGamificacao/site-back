@@ -32,3 +32,25 @@ def post():
     print('Flushed in db')
 
     return jsonify(task.to_dict()), 201
+
+@task_blueprint.route('/<int:task_id>', methods=['PUT', 'PATCH'])
+def update(task_id):
+    data = request.get_json()
+    print(data)
+    task = db.session.query(Task).filter(Task.task_id == task_id).first()
+
+    if task:
+        for item in data:
+            if item == 'done':
+                item = (data[item] in ('true', 'True', True))
+                task.done = item
+            else:
+                setattr(task, item, data[item])
+    
+        db.session.commit()
+        return jsonify(task.to_dict()), 200
+    else:
+        return jsonify({
+            'status': 'error',
+            'description': 'Task not found'
+        }), 404
