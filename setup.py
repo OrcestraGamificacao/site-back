@@ -3,22 +3,13 @@ from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-# with open(os.path.join(here, 'README.md')) as f:
-#     README = f.read()
-
-# requires = [
-#     'sqlalchemy',
-#     'psycopg2',
-#     'alembic',
-#     'flask',
-#     'flask-sqlalchemy'
-# ]
-
-# tests_require = [
-#     'pytest',  # includes virtualenv
-#     'pytest-cov'
-# ]
-
+install_requires = [
+    'flask',
+    'sqlalchemy',
+    'flask-sqlalchemy',
+    'alembic',
+    'psycopg2'
+]
 
 setup(
     name='site-backend',
@@ -26,5 +17,8 @@ setup(
     description='Backend site orcestra',
     author='Orcestra',
     author_email='projetos@orcestra.com.br',
+    include_package_data=True,
+    zip_safe=False,
+    install_requires=install_requires,
     packages=find_packages()
 )

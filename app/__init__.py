@@ -1,21 +1,24 @@
 import os
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy  import SQLAlchemy
+from app.models import HTTPError
+import app.config as cf
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_URI', 'postgresql://anitta:123456@localhost:5433/flaskapp')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app=app)
+app = cf.create_app(__name__)
+db = cf.get_db_instance(app)
 
 # Register views
 from app.views.task import task_blueprint
 
-@app.route('/')
-def home():
-    return 'OLA MUNDO'
-
 app.register_blueprint(task_blueprint)
+
+# Register handlers
+@app.errorhandler(HTTPError)
+def handle_http_error(error):
+    res = jsonify(error.to_dict())
+    res.status_code = error.status_code
+
+    return res
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
