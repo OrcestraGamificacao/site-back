@@ -29,12 +29,8 @@ target_metadata = Base.metadata
 
 # Get database variables
 def get_url():
-    return "postgresql://{}:{}@{}/{}".format(
-        os.getenv('DB_USER', 'anitta'),
-        os.getenv('DB_PASSWORD', '123456'),
-        os.getenv('DB_HOST', 'localhost:5433'),
-        os.getenv('DB_NAME', 'flaskapp')
-    )
+    db_uri = os.getenv("DB_URI", 'postgresql://anitta:123456@localhost:5433/flaskapp')
+    return db_uri
 
 def run_migrations_offline():
     """Run migrations in 'offline' mode.

@@ -16,7 +16,7 @@ class Task(Base):
 
     name = Column(String(125), nullable=False)
 
-    decription = Column(String(1024))
+    description = Column(String(1024))
 
     done = Column(Boolean('done_contraint'))
 
@@ -30,4 +30,12 @@ class Task(Base):
                 + "name=%s, " % self.name
                 + "description=%s, " % self.description
                 + "done=%s)>" % self.done)
+
+    def to_dict(self):
+        return dict(
+            name = self.name,
+            description = self.description,
+            done = self.done,
+            id = self.task_id
+        )
 

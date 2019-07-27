@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+  db:
+    image: postgres
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_DB=flaskapp
+      - POSTGRES_USER=anitta
+      - POSTGRES_PASSWORD=123456
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+    driver: local
+

@@ -1,8 +1,8 @@
 """Create task table
 
-Revision ID: e47233b458f0
+Revision ID: 3d4314b49bb9
 Revises: 
-Create Date: 2019-07-26 16:42:38.092488
+Create Date: 2019-07-26 17:45:47.846878
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e47233b458f0'
+revision = '3d4314b49bb9'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,7 +21,7 @@ def upgrade():
     op.create_table('tasks',
     sa.Column('task_id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('name', sa.String(length=125), nullable=False),
-    sa.Column('decription', sa.String(length=1024), nullable=True),
+    sa.Column('description', sa.String(length=1024), nullable=True),
     sa.Column('done', sa.Boolean(create_constraint='done_contraint'), nullable=True),
     sa.PrimaryKeyConstraint('task_id')
     )
